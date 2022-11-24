@@ -23,9 +23,10 @@ class Star{
         this.inset = inset;
         this.radius = radius;
         this.n = n;
+        this.alpha = Math.random() + 0.2;
     }
     draw(){
-        c.strokeStyle = "green";
+        c.fillStyle = `rgba(0,255,0,${this.alpha})`;
         c.beginPath();
         c.save();
         c.translate(this.x,this.y);
@@ -40,12 +41,23 @@ class Star{
 
         c.restore();
         c.closePath();
-        c.stroke();
+        c.fill();
         this.x += this.dx;
         this.y += this.dy;
     }
 }
-stars.push(new Star(randomIntFromInterval(50, canvas.width - 50),0,0,randomIntFromInterval(1,3),100,0.5,6));
+// Pushing stars in the stars array : 
+for(let i = 0; i < 20; i++){
+    let x = randomIntFromInterval(50, canvas.width - 50);
+    let y = 0;
+    let dx = 0;
+    let dy = randomIntFromInterval(2,5);
+    let radius = randomIntFromInterval(50, 100);
+    let inset = Math.random();
+    // The number of legs : 
+    let n = randomIntFromInterval(3, 10);
+    stars.push(new Star(x,y,dx,dy,radius,inset,n));
+}
 // Making our animation loop : 
 function animate(){
     // Drawing the black background : 
